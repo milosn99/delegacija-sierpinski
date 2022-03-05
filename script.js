@@ -1,17 +1,25 @@
-//Definisanje pocetnih tacaka
+//Definisanje velicine kanvasa i broja iteracija
+const kontekst = {
+  sirina: 600,
+  visina: 600,
+  maxIteracija: 10,
+  minIteracija: 0,
+};
+
+//Definisanje vrhova pocetnog trougla
 const tacka0 = {
-  x: 300,
-  y: 600 - 519.615242271,
+  x: kontekst.sirina / 2,
+  y: kontekst.visina - (Math.sqrt(3) * kontekst.visina) / 2, //Visina jednakostranicnog trougla
 };
 
 const tacka1 = {
   x: 0,
-  y: 600,
+  y: kontekst.visina,
 };
 
 const tacka2 = {
-  x: 600,
-  y: 600,
+  x: kontekst.sirina,
+  y: kontekst.visina,
 };
 
 //Definisanje boja zbog vizualizacije
@@ -29,14 +37,6 @@ const boje = [
   "darkgreen",
 ];
 
-//Definisanje velicine kanvasa i broja iteracija
-const kontekst = {
-  sirina: 600,
-  visina: 600,
-  maxIteracija: 10,
-  minIteracija: 0,
-};
-
 //Definisanje listerenera za promjenu broja iteracija
 document
   .getElementById("number")
@@ -47,13 +47,13 @@ function handleChangeBrojIteracija(e) {
   resenje(brojIteracija);
 }
 
-//funkcija za iscrtavanje
+//Funkcija za iscrtavanje
 function resenje(brojIteracija) {
-  let c = document.getElementById("canvas");
-  let ctx = c.getContext("2d");
+  let ctx = document.getElementById("canvas").getContext("2d");
   ctx.canvas.width = kontekst.sirina;
   ctx.canvas.height = kontekst.visina;
 
+  //Postavljanje limita na vrednosti broja iteracija
   if (brojIteracija < kontekst.minIteracija)
     brojIteracija = kontekst.minIteracija;
   if (brojIteracija > kontekst.maxIteracija)
@@ -62,7 +62,7 @@ function resenje(brojIteracija) {
   sierpinski(tacka0, tacka1, tacka2, brojIteracija);
 }
 
-//funkcija za crtanje jednog trougla
+//Funkcija za crtanje jednog trougla
 function nacrtajTrougao(A, B, C, boja) {
   let c = document.getElementById("canvas");
   let ctx = c.getContext("2d");
@@ -74,13 +74,14 @@ function nacrtajTrougao(A, B, C, boja) {
   ctx.lineTo(A.x, A.y);
   ctx.closePath();
 
-  // ctx.stroke();
   ctx.fillStyle = boja;
   ctx.fill();
 }
 
 //Algoritam za kreiranje trougla Sjerpinskog za N iteracija
 function sierpinski(A, B, C, n) {
+  if (n < 0) return;
+
   nacrtajTrougao(A, B, C, boje[n]);
 
   //Rekurzivni poziv za gornji, levi i desni trougao
