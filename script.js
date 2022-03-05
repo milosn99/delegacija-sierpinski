@@ -55,7 +55,7 @@ document.getElementById("animacija").addEventListener("click", (e) => {
     (function (i) {
       setTimeout(() => {
         resenje(i);
-        if (i == 10) document.getElementById("brojIteracija").disabled = true;
+        if (i == 10) document.getElementById("brojIteracija").disabled = false;
       }, 500 * i);
     })(i);
   }
