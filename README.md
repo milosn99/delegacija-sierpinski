@@ -1,7 +1,7 @@
-# SIEPRINSKI TRIANGLE - DELEGACIJA
+# SIEPRINSKI TROUGAO - DELEGACIJA
 
-Draws Sierpinski triangle with user's choice of depth. In this example app, the depth has an upper limit of 10, but the algorithm works for any value.
+Aplikacija koja crta trougao Sierpinskog sa brojem iteracija koje korisnik izabere. U ovom primeru, broj iteracija ima limit od 10, ali algoritam je napisan tako da radi bez obzira na broj iteracija.
 
-Coded in HTML and Vanilla JavaScript.
+Kod napisan u Vanilla JavaScript-u i HTML-u.
 
-Made for the purposes of FON Hakaton 2022 selection process by team Delegacija.
+Napravljen za potrebe selekcije za FON Hakaton 2022 - Tim Delegacija.

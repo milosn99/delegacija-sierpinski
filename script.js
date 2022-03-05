@@ -39,11 +39,11 @@ const boje = [
 
 //Definisanje listerenera za promjenu broja iteracija
 document
-  .getElementById("number")
+  .getElementById("brojIteracija")
   .addEventListener("change", handleChangeBrojIteracija);
 
 function handleChangeBrojIteracija(e) {
-  let brojIteracija = document.getElementById("number").value;
+  let brojIteracija = document.getElementById("brojIteracija").value;
   resenje(brojIteracija);
 }
 
