@@ -17,6 +17,17 @@ document
   .getElementById("number")
   .addEventListener("change", handleChangeBrojIteracija);
 
+document.getElementById("animacija").addEventListener("click", function (e) {
+  e.preventDefault();
+  for (var i = 0; i < 10; i++) {
+    (function (i) {
+      setTimeout(function () {
+        iscrtaj(i);
+      }, 500 * i);
+    })(i);
+  }
+});
+
 function handleChangeBrojIteracija(e) {
   let brojIteracija = document.getElementById("number").value;
   iscrtaj(brojIteracija);
