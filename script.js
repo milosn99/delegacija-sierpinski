@@ -16,16 +16,17 @@ const tacka2 = {
 
 //Definisanje boja zbog vizualizacije
 const boje = [
+  "yellow",
+  "orange",
+  "red",
+  "pink",
+  "purple",
   "blue",
   "lightblue",
+  "teal",
+  "lightgreen",
   "green",
-  "yellow",
-  "red",
-  "purple",
-  "pink",
-  "black",
-  "white",
-  "gray",
+  "darkgreen",
 ];
 
 //Definisanje velicine kanvasa i broja iteracija
@@ -73,15 +74,17 @@ function nacrtajTrougao(A, B, C, boja) {
   ctx.lineTo(A.x, A.y);
   ctx.closePath();
 
+  // ctx.stroke();
   ctx.fillStyle = boja;
   ctx.fill();
 }
 
 //Algoritam za kreiranje trougla Sjerpinskog za N iteracija
 function sierpinski(A, B, C, n) {
-  if (n >= 0) {
-    nacrtajTrougao(A, B, C, boje[n]);
+  nacrtajTrougao(A, B, C, boje[n]);
 
+  //Rekurzivni poziv za gornji, levi i desni trougao
+  if (n > 0) {
     //Racunanje vrhova unutrasnjeg trougla
     let AB = {
       x: (A.x + B.x) / 2,
@@ -98,12 +101,9 @@ function sierpinski(A, B, C, n) {
       y: B.y,
     };
 
-    //Rekurzivni poziv za gornji, levi i desni trougao
-    if (n > 0) {
-      sierpinski(A, AB, AC, n - 1);
-      sierpinski(AB, B, BC, n - 1);
-      sierpinski(AC, BC, C, n - 1);
-    }
+    sierpinski(A, AB, AC, n - 1);
+    sierpinski(AB, B, BC, n - 1);
+    sierpinski(AC, BC, C, n - 1);
   }
 }
 
