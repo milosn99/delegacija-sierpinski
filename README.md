@@ -1,4 +1,4 @@
-# SIEPRINSKI TROUGAO - DELEGACIJA
+# SIERPINSKI TROUGAO - DELEGACIJA
 
 Aplikacija koja crta trougao Sierpinskog sa brojem iteracija koje korisnik izabere. U ovom primeru, broj iteracija ima limit od 10, ali algoritam je napisan tako da radi bez obzira na broj iteracija.
 
