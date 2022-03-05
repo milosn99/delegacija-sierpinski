@@ -6,7 +6,7 @@ const kontekst = {
   minIteracija: 0,
 };
 
-//Definisanje vrhova pocetnog trougla
+//Definisanje temena pocetnog trougla
 const tacka0 = {
   x: kontekst.sirina / 2,
   y: kontekst.visina - (Math.sqrt(3) * kontekst.visina) / 2, //Visina jednakostranicnog trougla
@@ -37,17 +37,13 @@ const boje = [
   "darkgreen",
 ];
 
-//Definisanje listerenera za promjenu broja iteracija
-document
-  .getElementById("brojIteracija")
-  .addEventListener("change", handleChangeBrojIteracija);
-
-function handleChangeBrojIteracija(e) {
+//Definisanje listenera za promjenu broja iteracija
+document.getElementById("brojIteracija").addEventListener("change", (e) => {
   let brojIteracija = document.getElementById("brojIteracija").value;
   resenje(brojIteracija);
-}
+});
 
-//Funkcija za iscrtavanje
+//Funkcija za pocetak iscrtavanja
 function resenje(brojIteracija) {
   let ctx = document.getElementById("canvas").getContext("2d");
   ctx.canvas.width = kontekst.sirina;
@@ -86,7 +82,7 @@ function sierpinski(A, B, C, n) {
 
   //Rekurzivni poziv za gornji, levi i desni trougao
   if (n > 0) {
-    //Racunanje vrhova unutrasnjeg trougla
+    //Racunanje temena unutrasnjeg trougla
     let AB = {
       x: (A.x + B.x) / 2,
       y: (A.y + B.y) / 2,
