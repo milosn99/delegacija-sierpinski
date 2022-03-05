@@ -83,17 +83,17 @@ function sierpinski(A, B, C, n) {
   //Rekurzivni poziv za gornji, levi i desni trougao
   if (n > 0) {
     //Racunanje temena unutrasnjeg trougla
-    let AB = {
+    const AB = {
       x: (A.x + B.x) / 2,
       y: (A.y + B.y) / 2,
     };
 
-    let AC = {
+    const AC = {
       x: (C.x + A.x) / 2,
       y: (A.y + B.y) / 2,
     };
 
-    let BC = {
+    const BC = {
       x: A.x,
       y: B.y,
     };
