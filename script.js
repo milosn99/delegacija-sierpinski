@@ -50,10 +50,12 @@ function handleChangeBrojIteracija(e) {
 //Funkcija za animaciju
 document.getElementById("animacija").addEventListener("click", (e) => {
   e.preventDefault();
+  document.getElementById("brojIteracija").disabled = true;
   for (var i = 0; i <= 10; i++) {
     (function (i) {
       setTimeout(() => {
         resenje(i);
+        if (i == 10) document.getElementById("brojIteracija").disabled = true;
       }, 500 * i);
     })(i);
   }
