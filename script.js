@@ -47,6 +47,18 @@ function handleChangeBrojIteracija(e) {
   resenje(brojIteracija);
 }
 
+//Funkcija za animaciju
+document.getElementById("animacija").addEventListener("click", (e) => {
+  e.preventDefault();
+  for (var i = 0; i <= 10; i++) {
+    (function (i) {
+      setTimeout(() => {
+        resenje(i);
+      }, 500 * i);
+    })(i);
+  }
+});
+
 //Funkcija za iscrtavanje
 function resenje(brojIteracija) {
   let ctx = document.getElementById("canvas").getContext("2d");
