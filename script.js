@@ -1,40 +1,69 @@
-let tacka0 = {
-  x: 300,
-  y: 600 - 519.615242271,
+//Definisanje velicine kanvasa i broja iteracija
+const kontekst = {
+  sirina: 600,
+  visina: 600,
+  maxIteracija: 10,
+  minIteracija: 0,
 };
 
-let tacka1 = {
+//Definisanje vrhova pocetnog trougla
+const tacka0 = {
+  x: kontekst.sirina / 2,
+  y: kontekst.visina - (Math.sqrt(3) * kontekst.visina) / 2, //Visina jednakostranicnog trougla
+};
+
+const tacka1 = {
   x: 0,
-  y: 600,
+  y: kontekst.visina,
 };
 
-let tacka2 = {
-  x: 600,
-  y: 600,
+const tacka2 = {
+  x: kontekst.sirina,
+  y: kontekst.visina,
 };
 
+//Definisanje boja zbog vizualizacije
+const boje = [
+  "yellow",
+  "orange",
+  "red",
+  "pink",
+  "purple",
+  "blue",
+  "lightblue",
+  "teal",
+  "lightgreen",
+  "green",
+  "darkgreen",
+];
+
+//Definisanje listerenera za promjenu broja iteracija
 document
-  .getElementById("number")
+  .getElementById("brojIteracija")
   .addEventListener("change", handleChangeBrojIteracija);
 
 function handleChangeBrojIteracija(e) {
-  let brojIteracija = document.getElementById("number").value;
-  iscrtaj(brojIteracija);
+  let brojIteracija = document.getElementById("brojIteracija").value;
+  resenje(brojIteracija);
 }
 
-function iscrtaj(brojIteracija) {
-  let c = document.getElementById("canvas");
-  let ctx = c.getContext("2d");
-  ctx.clearRect(0, 0, 600, 600);
+//Funkcija za iscrtavanje
+function resenje(brojIteracija) {
+  let ctx = document.getElementById("canvas").getContext("2d");
+  ctx.canvas.width = kontekst.sirina;
+  ctx.canvas.height = kontekst.visina;
 
-  if (brojIteracija < 0) brojIteracija = 0;
-  if (brojIteracija > 10) brojIteracija = 10;
+  //Postavljanje limita na vrednosti broja iteracija
+  if (brojIteracija < kontekst.minIteracija)
+    brojIteracija = kontekst.minIteracija;
+  if (brojIteracija > kontekst.maxIteracija)
+    brojIteracija = kontekst.maxIteracija;
 
-  nacrtajTrougao(tacka0, tacka1, tacka2);
   sierpinski(tacka0, tacka1, tacka2, brojIteracija);
 }
 
-function nacrtajTrougao(A, B, C) {
+//Funkcija za crtanje jednog trougla
+function nacrtajTrougao(A, B, C, boja) {
   let c = document.getElementById("canvas");
   let ctx = c.getContext("2d");
 
@@ -43,14 +72,21 @@ function nacrtajTrougao(A, B, C) {
   ctx.lineTo(B.x, B.y);
   ctx.lineTo(C.x, C.y);
   ctx.lineTo(A.x, A.y);
-  ctx.stroke();
-
   ctx.closePath();
+
+  ctx.fillStyle = boja;
+  ctx.fill();
 }
 
+//Algoritam za kreiranje trougla Sjerpinskog za N iteracija
 function sierpinski(A, B, C, n) {
-  if (n === 0) nacrtajTrougao(tacka0, tacka1, tacka2);
+  if (n < 0) return;
+
+  nacrtajTrougao(A, B, C, boje[n]);
+
+  //Rekurzivni poziv za gornji, levi i desni trougao
   if (n > 0) {
+    //Racunanje vrhova unutrasnjeg trougla
     let AB = {
       x: (A.x + B.x) / 2,
       y: (A.y + B.y) / 2,
@@ -66,13 +102,10 @@ function sierpinski(A, B, C, n) {
       y: B.y,
     };
 
-    nacrtajTrougao(AB, BC, AC);
-    if (n > 1) {
-      sierpinski(A, AB, AC, n - 1);
-      sierpinski(AB, B, BC, n - 1);
-      sierpinski(AC, BC, C, n - 1);
-    }
+    sierpinski(A, AB, AC, n - 1);
+    sierpinski(AB, B, BC, n - 1);
+    sierpinski(AC, BC, C, n - 1);
   }
 }
 
-iscrtaj(0);
+resenje(0);
